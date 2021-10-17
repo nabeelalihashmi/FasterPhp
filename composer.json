@@ -3,7 +3,6 @@
         "rakit/validation": "^1.4",
         "firebase/php-jwt": "^5.4",
         "symfony/cache": "^5.3",
-        "gabordemooij/redbean": "^5.7",
         "hashids/hashids": "^4.1",
         "rmccue/requests": "^1.8",
         "cakephp/chronos": "^2.3",

@@ -1,7 +1,7 @@
 <?php
 
 return [   
-    ['invalidtry.maxed', function($user) {
+    ['ban', function($user) {
         echo 'banning user with id: ';
     }],
 

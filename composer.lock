@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cccb45fd89a3433b2de8c7406c48c593",
+    "content-hash": "e7bb815ac0c82098034958c5b0fa7cd0",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -168,51 +168,6 @@
                 "source": "https://github.com/firebase/php-jwt/tree/v5.4.0"
             },
             "time": "2021-06-23T19:00:23+00:00"
-        },
-        {
-            "name": "gabordemooij/redbean",
-            "version": "v5.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/gabordemooij/redbean.git",
-                "reference": "e31aad3b38d5c34a809381f9a5283645ce4abb29"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/e31aad3b38d5c34a809381f9a5283645ce4abb29",
-                "reference": "e31aad3b38d5c34a809381f9a5283645ce4abb29",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "RedBeanPHP\\": "RedBeanPHP"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Gabor de Mooij",
-                    "email": "gabor@redbeanphp.com",
-                    "homepage": "https://redbeanphp.com"
-                }
-            ],
-            "description": "RedBeanPHP ORM",
-            "homepage": "https://redbeanphp.com/",
-            "keywords": [
-                "orm"
-            ],
-            "support": {
-                "issues": "https://github.com/gabordemooij/redbean/issues",
-                "source": "https://github.com/gabordemooij/redbean/tree/v5.7"
-            },
-            "time": "2021-03-28T11:01:15+00:00"
         },
         {
             "name": "hashids/hashids",
