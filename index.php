@@ -89,12 +89,13 @@ function route() {
         pink_error_handler();
         return;
     }
-    $params = [$params] ?? [];
+    $params = $params ?? [];
     $request = $request ?? Request::createFromGlobals();
     $response = $response ?? new Response('', Response::HTTP_OK, ['content-type' => 'text/html']);
     $params[] = $request;
     $params[] = $response;
-    
+
+
     if (include($route_file)) {
 
         $retVal = true;
@@ -104,16 +105,13 @@ function route() {
 
         if ($retVal === true) {
             $output = call_user_func_array($method, $params);
+            print_r($output);
         }
 
         if (function_exists($funcname = 'after_' . $method)) {
             $retVal = call_user_func_array($funcname, $params);
         }
 
-        
-        
-        
-        print_r($output);
     } else {
         d('Error:', '__P_OPEN', 'Error __P_ROUTE_NOT_HANDLED');
     }
@@ -124,6 +122,7 @@ function route() {
     
 function pink_error_handler() {
     header('HTTP/1.0 404 Not Found', true, 404);
+    echo 'Page Not Found';
     exit();
 }
 

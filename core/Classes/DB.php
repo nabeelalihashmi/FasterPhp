@@ -6,14 +6,16 @@
     use PDOException;
 
 
-    class FleckPDO {
+    class DB {
         private static $_instance = null;
 
         public function __construct() {
             try {
-                self::$_instance = new PDO("mysql:host={$_ENV['DB_HOST']};dbname={$_ENV['DB_NAME']}",
-                $_ENV['DB_USER'],
-                $_ENV['DB_PASS']);
+                self::$_instance = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME,
+                    DB_USER,
+                    DB_PASS
+                );
+
                 self::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();

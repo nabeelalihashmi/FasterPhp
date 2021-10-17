@@ -9,8 +9,9 @@ class HashId {
 
     public function __construct()
     {
-      self::$_instance = new Hashids($_ENV['APP_NAME'], 16);
+      self::$_instance = new Hashids(APP_KEY, 16);
     }
+
     public static function instance() {
 
         if (self::$_instance == null) {

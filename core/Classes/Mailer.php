@@ -6,6 +6,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+require('config/mail.php');
+
 class Mailer
 {
     
@@ -35,15 +37,15 @@ class Mailer
 
         $mail = self::newinstance();
         $mail->IsSMTP();
-        $mail->SMTPDebug = intval($_ENV['SMTP_DEBUG']);
+        $mail->SMTPDebug = intval(SMTP_DEBUG);
         $mail->SMTPAuth   = true;
-        $mail->SMTPSecure = $_ENV['SMTP_SECURE'];
+        $mail->SMTPSecure = SMTP_SECURE;
         
-        $mail->Host       = $_ENV['SMTP_HOST'];
-        $mail->Port       = $_ENV['SMTP_PORT'];
+        $mail->Host       = SMTP_HOST;
+        $mail->Port       = SMTP_PORT;
 
 
-        $mail->setFrom($from, $_ENV['EMAIL_SENDER']);
+        $mail->setFrom($from, EMAIL_SENDER);
         $mail->Username = $from;
         $mail->Password = $password;
 
@@ -67,7 +69,7 @@ class Mailer
 
         $mail = self::newinstance();
         
-        $mail->setFrom($from, $_ENV['EMAIL_SENDER']);
+        $mail->setFrom($from, EMAIL_SENDER);
         $mail->Username = $from;
 
         foreach($to as $address => $nick) {
@@ -86,10 +88,10 @@ class Mailer
     }
 
     public static function mail($subject, $to, $body, $altBody, $from = null, $password = null) {
-        if ($_ENV['EMAIL_METHOD'] == 'SMTP') {
-            return self::smtpMail($subject, $to, $body, $altBody, $from ?? $_ENV['EMAIL_FROM'], $password ?? $_ENV['EMAIL_PASS']);
+        if (EMAIL_METHOD == 'SMTP') {
+            return self::smtpMail($subject, $to, $body, $altBody, $from ?? EMAIL_FROM, $password ?? EMAIL_PASS);
         } 
-        return self::sendMail($subject, $to, $body, $altBody, $from ?? $_ENV['EMAIL_FROM']);
+        return self::sendMail($subject, $to, $body, $altBody, $from ?? EMAIL_FROM);
     }
 
 }
