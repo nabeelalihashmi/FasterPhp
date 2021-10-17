@@ -17,6 +17,6 @@ define('BASEPATH', "http://dev.fleck");
 
 $use_composer = true;
 $use_tracy = false;
-$use_redbeans = false;
-$use_eventhandler = false;
+$use_redbeans = true;
+$use_eventhandler = true;
 
