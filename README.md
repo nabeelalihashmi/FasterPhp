@@ -16,12 +16,31 @@ FasterPHP is a Route-Oriented Framework for Writing Php apps. Every file in Rout
     git clone https://github.com/nabeelalihashmi/FasterPhp.git
   ```
   And start writing code.
+
+### Componets
+
+* Custom Router
+* RedBeanPHP
+* Symfony Components [Cache, HTTP-Foundation]
+* RakitValidation
+  * And Other...
+
 ### Folder Structure
 * app/Routes
 
 
 ### Middlware
-Before Middleware = before_get(). The Middleware function must return true to exectue. 
+Before Middleware = before_get(). The Middleware function must return true to exectue main function.
+parameters are passed to middleware as array;
+
+```
+function before_get($params) {
+  
+}
+function after_get($params) {
+
+}
+```
 
 
 ### Points
@@ -33,23 +52,23 @@ like
 /api/add/half/divide/Ten/20
 Filename: app/Routes/add/half/divide/Ten.php
 [OR]      app/Routes/add/half/divide/Ten/index.php
-Function: get(number, Request $request Response $response);
+Function: get(number);
 
 
 /api/add/half/divide/20/20
 Filename: app/Routes/add/half/divide.php
 [OR]      app/Routes/add/half/divide/index.php
-Function: get(number1, number2, Request $request Response $response);
+Function: get(number1, number2);
 
 /api/add/half/20/20
 Filename: app/Routes/add/half.php
 [OR]      app/Routes/add/half/index.php
-Function: get(number1, number2, Request $request Response $response);
+Function: get(number1, number2);
 
 /api/add/10/20
 Filename: app/Routes/add.php
 [OR]      app/Routes/add/index.php
-Function: get(number1, number2, Request $request Response $response);
+Function: get(number1, number2);
 ```
 
 ### How These Will Exectue:
