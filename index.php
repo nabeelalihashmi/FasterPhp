@@ -86,7 +86,7 @@ function route() {
         }
     }
     if ($route_file === '') {
-        // pink_error_handler();
+        pink_error_handler();
         return;
     }
     $params = [$params] ?? [];
@@ -96,7 +96,23 @@ function route() {
     $params[] = $response;
     
     if (include($route_file)) {
-        $output = call_user_func_array($method, $params);
+
+        $retVal = true;
+        if (function_exists($funcname = 'before_' . $method)) {
+            $retVal = call_user_func_array($funcname, $params);
+        }
+
+        if ($retVal === true) {
+            $output = call_user_func_array($method, $params);
+        }
+
+        if (function_exists($funcname = 'after_' . $method)) {
+            $retVal = call_user_func_array($funcname, $params);
+        }
+
+        
+        
+        
         print_r($output);
     } else {
         d('Error:', '__P_OPEN', 'Error __P_ROUTE_NOT_HANDLED');

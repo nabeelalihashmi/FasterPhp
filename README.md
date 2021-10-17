@@ -17,4 +17,8 @@ FasterPHP is a Route-Oriented Framework for Writing Php apps. Every file in Rout
   ```
   And start writing code.
 ### Folder Structure
-* app/routes
+* app/Routes
+
+
+### Middlware
+Before Middleware = before_get(). The Middleware function must return true to exectue. 
