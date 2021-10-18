@@ -104,10 +104,17 @@ function route() {
 
     if (include($route_file)) {
 
+        
         if (isset($route_schema)) {
-            if (!verifySchema($route_schema, $method, $params)) {
-
+            $schemaResult = parseSchema($route_schema, $method, $params);
+            if (!$schemaResult) {
                 return false;
+            }
+            if (is_array($schemaResult)) {
+                if ($schemaResult[0] == 'proxy') {
+                    $method = $schemaResult[1];
+                    $params = $schemaResult[2];
+                }
             }
         }
         $retVal = true;
@@ -132,10 +139,30 @@ function route() {
     return true;
 }
 
-function verifySchema($schema, $method, $params) {
+function parseSchema($schema, $method, $params) {
 
     if (!in_array($method, $schema['allowed_methods'], true)) {
         return false;
+    }
+
+    $proxies = $schema['methods'][$method]['proxies'] ?? null;
+    if ($proxies !== null) {
+        foreach($proxies as $proxy) {
+            $p = trim($proxy[0], '/');
+            $proxy_params = explode('/', $p);
+            d('proxy_params', $proxy_params);
+            d('params', $params);
+            if (count($proxy_params) == count($params)) {
+                $newParams = [];
+                foreach($proxy_params as $key => $value) {
+                    if ($value === '?') {
+                        $newParams[] = $params[$key];
+                    }
+                }
+
+                return ['proxy', $proxy[1], $newParams];
+            }
+        }
     }
 
     $f = new ReflectionFunction($method);
@@ -147,6 +174,10 @@ function verifySchema($schema, $method, $params) {
     }
 
     return true;
+}
+
+function handleProxy() {
+    
 }
 
 function pink_error_handler() {

@@ -15,7 +15,7 @@ define('APP_KEY', "NMsssJHoiI73JjyWkWN2kNKNJ@32Ud2#52nk1J*(@*)))");
 define('BASEPATH', "http://dev.fleck");
 
 
-$use_redbeans = false;
+$use_redbeans = true;
 
 $use_composer = false;
 $use_tracy = false;
