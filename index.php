@@ -6,8 +6,11 @@ date_default_timezone_set('UTC');
 use Tracy\Debugger;
 use Core\Classes\Emitter;
 
+
+
 include './core/libs/general.php';
 include './config/config.php';
+include './config/constants.php';
 
 if ($api_default) {
     header('Content-Type: application/json');

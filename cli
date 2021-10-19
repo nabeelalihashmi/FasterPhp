@@ -1,0 +1,15 @@
+<?php
+php_sapi_name() !== 'cli' ? die('Fuck Off') : main($argc, $argv);
+
+function main($argc, $argv) { 
+    $command = $argv[1];
+    $command = './commands/' . str_replace(':', '/', $command) . '.php';
+    if (!file_exists($command)) {
+        echo 'Command Not Found';
+        exit();
+    }
+    include($command);
+    $GLOBALS['APP_DIR'] = dirname(__FILE__);
+    $params = array_splice($argv, 2, $argc);
+    call_user_func_array('handle', $params);
+}

@@ -31,16 +31,16 @@ function get($category = 'all') {
 }
 
 function proxy_get_weapon($order, $id) { 
-    d('calling proxy function', "id:  $id", "order: $order");
+    // d('calling proxy function', "id:  $id", "order: $order");
     echo 'Calling Home Proxy';
-    d('page:' , 'home proxy');
-    $sql = "";
-    $bindings = [];
+    // d('page:' , 'home proxy');
+    // $sql = "";
+    // $bindings = [];
     
-    $sql = 'where id = ?';
-    $bindings[] = $id;
+    // $sql = 'where id = ?';
+    // $bindings[] = $id;
 
 
-    $stats = R::findAll('stats', $sql, $bindings);
-    d('proxy stats', $stats);
+    // $stats = R::findAll('stats', $sql, $bindings);
+    // d('proxy stats', $stats);
 }

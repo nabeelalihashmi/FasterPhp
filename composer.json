@@ -6,9 +6,9 @@
         "hashids/hashids": "^4.1",
         "rmccue/requests": "^1.8",
         "cakephp/chronos": "^2.3",
-        "evenement/evenement": "^3.0",
         "phpmailer/phpmailer": "^6.5",
-        "symfony/http-foundation": "^5.3"        
+        "symfony/http-foundation": "^5.3",
+        "evenement/evenement": "^3.0"        
     },
     "autoload": {
         "psr-4": {
