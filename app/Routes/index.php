@@ -9,12 +9,12 @@ $route_schema = [
     'allowed_methods' => ['get', 'post', 'delete', 'put'],
     'methods' => [
         'get' => [
-            'allowed_params' => 2,
-            'allowed_types' => []
+            'proxies' => [
+                ['?/weapon/?', 'proxy_get_weapon', 'pubg/stats.php']
+            ]
         ]
     ]
 ];
-
 /**
  *  get index
  *  handles = /x/y/z
@@ -25,9 +25,10 @@ $route_schema = [
  */
 
 function get($username = null , $param_2 = 10, $param_3 = 50) {
-    // d('param1', $username);
-    // d('param2', $param_2);
-    return 'Hello';
+    d('param1', $username);
+    d('param2', $param_2);
+    d('param3', $param_3);
+    return 'Hello, world';
     // return json_encode(['msg' => 'Hello, World']);
 }
 

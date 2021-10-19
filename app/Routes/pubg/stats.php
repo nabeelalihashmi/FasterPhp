@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * Route Schema
  * 
@@ -17,30 +18,16 @@ $route_schema = [
 
 function get($category = 'all') {
     echo 'Calling Home';
-    d('page:' , 'home');
+    d('page:', 'home');
     $sql = "";
     $bindings = [];
     if ($category != 'all') {
         $sql = 'where category = ?';
         $bindings[] = $category;
     }
-    
+
 
     $stats = R::findAll('stats', $sql, $bindings);
     d('stats', $stats);
 }
 
-function proxy_get_weapon($order, $id) { 
-    // d('calling proxy function', "id:  $id", "order: $order");
-    echo 'Calling Home Proxy';
-    // d('page:' , 'home proxy');
-    // $sql = "";
-    // $bindings = [];
-    
-    // $sql = 'where id = ?';
-    // $bindings[] = $id;
-
-
-    // $stats = R::findAll('stats', $sql, $bindings);
-    // d('proxy stats', $stats);
-}

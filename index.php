@@ -97,9 +97,9 @@ function route() {
         }
     }
 
-    if (!empty($params) && $route_file === '') {
-        $route_file = __DIR__ . '/app/Routes/index.php';
-    }
+    // if (!empty($params) && $route_file === '') {
+    //     $route_file = __DIR__ . '/app/Routes/index.php';
+    // }
     if ($route_file === '') {
         return false;
     }
@@ -114,13 +114,19 @@ function route() {
                 return false;
             }
             if (is_array($schemaResult)) {
+                d('sc_r', $schemaResult);
                 if ($schemaResult[0] == 'proxy') {
-                    $method = $schemaResult[1];
-                    $params = $schemaResult[2];
+                    if (($proxy_file = $schemaResult[1]) !== null) {
+                        require_once(__DIR__ . '/app/Proxies/' . $proxy_file);
+                    }
+                    $method = $schemaResult[2];
+                    $params = $schemaResult[3];
                 }
             }
         }
         $retVal = true;
+
+        d('details of execution', $method, $params);
 
         if (function_exists($funcname = 'before_' . $method)) {
             $retVal = call_user_func_array($funcname, [$params]);
@@ -163,7 +169,7 @@ function parseSchema($schema, $method, $params) {
                     }
                 }
 
-                return ['proxy', $proxy[1], $newParams];
+                return ['proxy', $proxy[2], $proxy[1] ?? null, $newParams];
             }
         }
     }
