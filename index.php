@@ -4,6 +4,7 @@ date_default_timezone_set('UTC');
 
 
 use Tracy\Debugger;
+use Core\Classes\HashId;
 use Core\Classes\Emitter;
 
 
@@ -16,9 +17,20 @@ if ($api_default) {
     header('Content-Type: application/json');
 }
 
+
+// spl_autoload_register(function($class) {
+//     include_once './vendor/autoload.php';
+// });
+
+// spl_autoload_register(function($class) {
+//     if(!include_once str_replace('\\', '/', $class) . '.php') {
+//         include_once './vendor/autoload.php';
+//     }
+// });
+
 if ($use_composer) {
 
-    include './vendor/autoload.php';
+    include_once './vendor/autoload.php';
     
     if ($use_tracy && !$api_default) {
         Debugger::$strictMode = true;
@@ -114,7 +126,7 @@ function route() {
                 return false;
             }
             if (is_array($schemaResult)) {
-                d('sc_r', $schemaResult);
+                // d('sc_r', $schemaResult);
                 if ($schemaResult[0] == 'proxy') {
                     if (($proxy_file = $schemaResult[1]) !== null) {
                         require_once(__DIR__ . '/app/Proxies/' . $proxy_file);
@@ -126,7 +138,9 @@ function route() {
         }
         $retVal = true;
 
-        d('details of execution', $method, $params);
+        
+        // d('details of execution', $method, $params);
+        // return;
 
         if (function_exists($funcname = 'before_' . $method)) {
             $retVal = call_user_func_array($funcname, [$params]);
@@ -141,6 +155,7 @@ function route() {
             $retVal = call_user_func_array($funcname, [$params]);
         }
     } else {
+        // pink_error_handler();
         d('Error:', '__P_OPEN', 'Error __P_ROUTE_NOT_HANDLED');
         return false;
     }
@@ -156,20 +171,31 @@ function parseSchema($schema, $method, $params) {
 
     $proxies = $schema['methods'][$method]['proxies'] ?? null;
     if ($proxies !== null) {
+        $matching_proxy = null;
         foreach($proxies as $proxy) {
+            // find_matching proxy;
             $p = trim($proxy[0], '/');
+            $tempProxyParsedStr =  "";//str_replace('?', '', $p);
             $proxy_params = explode('/', $p);
-            d('proxy_params', $proxy_params);
-            d('params', $params);
+            d('proxy_params', $proxy_params, $params);
             if (count($proxy_params) == count($params)) {
                 $newParams = [];
+                $newTempProxy = '/' . implode('/', $params) . '/';
                 foreach($proxy_params as $key => $value) {
                     if ($value === '?') {
                         $newParams[] = $params[$key];
+                        $tempProxyParsedStr .=  '/' . $params[$key]  . '/';
+                    } else { 
+                        $tempProxyParsedStr .= $proxy_params[$key];
                     }
                 }
 
-                return ['proxy', $proxy[2], $proxy[1] ?? null, $newParams];
+                $tempProxyParsedStr = str_replace('//', '/', $tempProxyParsedStr);
+                // tag, file_name, method_name, params 
+                d('shot',$tempProxyParsedStr, $newTempProxy);
+                if ($tempProxyParsedStr == $newTempProxy) { 
+                    return ['proxy', $proxy[2], $proxy[1] ?? null, $newParams];
+                }
             }
         }
     }
@@ -191,6 +217,6 @@ function handleProxy() {
 
 function pink_error_handler() {
     header('HTTP/1.0 404 Not Found', true, 404);
-    echo 'Page Not Found';
+    echo 'Not Found';
     exit();
 }

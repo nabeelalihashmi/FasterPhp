@@ -1,0 +1,14 @@
+<?php
+
+$route_schema = [
+    'allowed_methods' => __ALLOWED_METHODS__,
+    // user proxies
+    // 'methods' => [
+    //     'get' => [
+    //         'proxies' => [
+    //             ['?/weapon/?', 'proxy_get_weapon', 'pubg/stats.php']
+    //         ]
+    //     ]
+    // ]
+];
+

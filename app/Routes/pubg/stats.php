@@ -10,15 +10,16 @@ $route_schema = [
     'methods' => [
         'get' => [
             'proxies' => [
-                ['?/weapon/?', 'proxy_get_weapon']
+                // Position matters a lot
+                ['?/weapon/?', 'proxy_get_weapon', 'pubg/stats/weapon.php'],
+                ['?/not-weapon/?', 'proxy_get_weapon', 'pubg/stats/not_weapon.php'],
             ]
         ]
     ]
 ];
 
 function get($category = 'all') {
-    echo 'Calling Home';
-    d('page:', 'home');
+    header('Content-Type: application/json');
     $sql = "";
     $bindings = [];
     if ($category != 'all') {
@@ -28,6 +29,8 @@ function get($category = 'all') {
 
 
     $stats = R::findAll('stats', $sql, $bindings);
-    d('stats', $stats);
+
+    return json_encode(['data' => R::exportAll($stats)]);
 }
+
 
