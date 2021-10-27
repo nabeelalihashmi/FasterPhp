@@ -5,7 +5,7 @@
 use Core\Classes\Mailer;
 use Symfony\Component\HttpFoundation\Request;
 
-$route_schema = [
+$route_schema_ = [
     'allowed_methods' => ['get', 'post', 'delete', 'put'],
     'methods' => [
         'get' => [
@@ -25,9 +25,9 @@ $route_schema = [
  */
 
 function get($username = null , $param_2 = 10, $param_3 = 50) {
-    d('param1', $username);
-    d('param2', $param_2);
-    d('param3', $param_3);
+    // d('param1', $username);
+    // d('param2', $param_2);
+    // d('param3', $param_3);
     return 'Hello, world';
     // return json_encode(['msg' => 'Hello, World']);
 }

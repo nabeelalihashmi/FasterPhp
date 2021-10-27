@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .coverup { 
+            color: red;
+        }
+
+        .video-container { 
+            position: relative;
+            background-color: black;
+            border: 1px solid black;
+        }
+
+        .coverup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            cursor: pinter;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        function removeCover() {
+            var element = document.querySelector("#cover");
+            element.remove();
+
+            var iframe = document.getElementById("iframe");
+            var e = iframe.contentWindow.document;
+            console.log('e: ', e)
+        }
+    </script>
+
+    <div class="outer-video-wrapper">
+        <div class="video-container" onclick="removeCover()">
+            <iframe src="https://www.youtube.com/embed/vAw4ylGI738" title="Video Player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                id="iframe"
+                >
+            </iframe>
+            <div id="cover" class="coverup">Riverside JACL </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

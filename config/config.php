@@ -17,8 +17,12 @@ define('BASEPATH', "http://localhost/FasterPhp");
 
 $use_redbeans = true;
 
-$use_composer = false;
+$use_composer = true;
 $use_tracy = false;
 $use_eventhandler = true;
+
+$use_svelte = false;
 $api_default = false;
 
+
+$use_session = true;
